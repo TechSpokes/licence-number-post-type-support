@@ -47,4 +47,12 @@ interface MetaInterface {
 	 */
 	public function save_meta( int $post_id ): void;
 
+	/**
+	 * @param int    $post_id The ID of the post being saved.
+	 * @param string $value   The licence info for the post.
+	 *
+	 * @return bool Whether the licence info was updated in database or is the same as the current value.
+	 */
+	public function update_meta( int $post_id, string $value = '' ): bool;
+
 }

@@ -11,7 +11,7 @@
  * Plugin Name: Licence Number Post Type Support by TechSpokes Inc.
  * Plugin URI:  https://github.com/TechSpokes/licence-number-post-type-support.git?utm_source=wordpress&utm_medium=plugin&utm_campaign=licence-number-post-type-support&utm_content=plugin-link
  * Description: Adds post type support "licence-number" to WordPress.
- * Version:     0.0.1
+ * Version:     0.0.2
  * Author:      TechSpokes Inc.
  * Author URI:  https://techspokes.com?utm_source=wordpress&utm_medium=plugin&utm_campaign=licence-number-post-type-support&utm_content=author-link
  * Text Domain: licence-number-post-type-support

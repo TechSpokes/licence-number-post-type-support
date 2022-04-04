@@ -26,6 +26,11 @@ interface CoreInterface {
 	public function getMeta(): MetaInterface;
 
 	/**
+	 * @return \TechSpokes\LicenceNumberPostTypeSupport\ReaderInterface The reader interface.
+	 */
+	public function getReader(): ReaderInterface;
+
+	/**
 	 * @return string[] The post types supporting the licence number feature.
 	 */
 	public function getPostTypes(): array;

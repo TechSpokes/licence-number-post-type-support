@@ -108,24 +108,35 @@ class Meta implements MetaInterface {
 		// check nonce and autosave status
 		if (
 			( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-			|| !isset( $_REQUEST['_wpnonce'] )
+			|| !isset( $_POST['_wpnonce'] )
 			|| !wp_verify_nonce(
-				$_REQUEST['_wpnonce'],
+				$_POST['_wpnonce'],
 				sprintf( 'update-post_%d', $post_id )
 			)
 		) {
 			// check failed
 			return;
 		}
+		$this->update_meta( $post_id, $_POST[ $this->getPlugin()->getMetaKey() ] ?? '' );
+	}
+
+	/**
+	 * @param int    $post_id The ID of the post being saved.
+	 * @param string $value   The licence info for the post.
+	 *
+	 * @return bool Whether the licence info was updated in database or is the same as the current value.
+	 */
+	public function update_meta( int $post_id, string $value = '' ): bool {
+		$value    = sanitize_text_field( $value );
 		$meta_key = $this->getPlugin()->getMetaKey();
-		$value    = isset( $_REQUEST[ $meta_key ] ) ?
-			sanitize_text_field( $_REQUEST[ $meta_key ] )
-			: '';
 		if ( empty( $value ) ) {
-			delete_post_meta( $post_id, $meta_key );
+			$update = delete_post_meta( $post_id, $meta_key );
 		} else {
-			update_post_meta( $post_id, $meta_key, $value );
+			$result = (bool) update_post_meta( $post_id, $meta_key, $value );
+			$update = !( false === $result ) || $value === get_post_meta( $post_id, $meta_key, true );
 		}
+
+		return $update;
 	}
 
 	/**

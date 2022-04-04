@@ -25,6 +25,11 @@ class Core implements CoreInterface {
 	protected $meta;
 
 	/**
+	 * @var \TechSpokes\LicenceNumberPostTypeSupport\ReaderInterface $reader The reader interface.
+	 */
+	protected $reader;
+
+	/**
 	 * @var string[] $post_types Array of post types supporting the licence number feature.
 	 */
 	protected $post_types;
@@ -114,6 +119,24 @@ class Core implements CoreInterface {
 	 */
 	protected function setMeta( MetaInterface $meta ): void {
 		$this->meta = $meta;
+	}
+
+	/**
+	 * @return \TechSpokes\LicenceNumberPostTypeSupport\ReaderInterface The reader interface.
+	 */
+	public function getReader(): ReaderInterface {
+		if ( !( $this->reader instanceof ReaderInterface ) ) {
+			$this->setReader( new Reader() );
+		}
+
+		return $this->reader;
+	}
+
+	/**
+	 * @param \TechSpokes\LicenceNumberPostTypeSupport\ReaderInterface $reader
+	 */
+	protected function setReader( ReaderInterface $reader ): void {
+		$this->reader = $reader;
 	}
 
 	/**
